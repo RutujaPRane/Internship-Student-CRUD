@@ -3,8 +3,6 @@ package in.one2n.hrithik.controllers;
 import in.one2n.hrithik.entities.Student;
 import in.one2n.hrithik.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,12 +37,7 @@ public class StudentController {
     }
 
     @DeleteMapping("/students/{id}")
-    public ResponseEntity<?> deleteStudentById(@PathVariable("id") Long studentId) {
-        try {
-            studentService.deleteStudentById(studentId);
-            return ResponseEntity.ok("ID: " + studentId + " Deleted Successfully");
-        } catch (EmptyResultDataAccessException e) {
-            return ResponseEntity.badRequest().body("ID: " + studentId + " Not Found");
-        }
+    public void deleteStudentById(@PathVariable("id") Long studentId) {
+        studentService.deleteStudentById(studentId);
     }
 }
